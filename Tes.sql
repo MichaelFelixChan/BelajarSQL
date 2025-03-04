@@ -19,15 +19,14 @@ CREATE TABLE Anggota(
     No_Telp varchar(12) NOT NULL -- Harusnya panjang data yaitu 25
 );
 
+-- Ubah panjang data tabel anggota
+ALTER TABLE Anggota Modify ID_Anggota char(10) NOT NULL PRIMARY KEY;
+ALTER TABLE Anggota Modify Nama varchar(50) NOT NULL;
+ALTER TABLE Anggota Modify Alamat varchar(200) NOT NULL;
+ALTER TABLE Anggota Modify NoTelp varchar(25) NOT NULL;
+
 -- Menampilkan isi tabel anggota
 desc anggota;
-
-CREATE TABLE Pustakawan(
-	ID_Pustakawan char(10) NOT NULL PRIMARY KEY,
-    Nama varchar(100) NOT NULL,
-    Alamat varchar(200) NOT NULL,
-    No_Telepon varchar(25) NOT NULL
-);
 
 CREATE TABLE Penulis(
 	ID_Penulis char(5) NOT NULL PRIMARY KEY,
@@ -36,6 +35,27 @@ CREATE TABLE Penulis(
     Bidang_Ilmu varchar(50) NOT NULL
 );
 
+CREATE TABLE Penerbit(
+	ID_Penerbit char(10) NOT NULL PRIMARY KEY,
+    Nama_Penerbit varchar(100) NOT NULL,
+    Alamat varchar(100) NOT NULL,
+    No_Telepon varchar(50) NOT NULL
+);
+
+CREATE TABLE Buku(
+	ID_Buku char(10) NOT NULL PRIMARY KEY,
+    Judul varchar(255) NOT NULL,
+    Tahun_Terbit year,
+    ID_Penerbit char(10),
+    FOREIGN KEY (ID_Penerbit) REFERENCES Penerbit(ID_Penerbit)
+);
+
+CREATE TABLE Pustakawan(
+	ID_Pustakawan char(10) NOT NULL PRIMARY KEY,
+    Nama varchar(100) NOT NULL,
+    Alamat varchar(200) NOT NULL,
+    No_Telepon varchar(25) NOT NULL
+);
 
 -- CREATE TABLE Peminjaman(
 -- 	ID_Peminjaman char(5) NOT NULL PRIMARY KEY,
@@ -46,21 +66,6 @@ CREATE TABLE Penulis(
 --     TanggalKembali date NOT NULL,
 --     FOREIGN KEY (ID_Anggota) REFERENCES Anggota(ID_Anggota),
 --     FOREIGN KEY (ID_Pustakawan) REFERENCES Pustakawan(ID_Pustakawan)
--- );
-
--- CREATE TABLE Buku(
--- 	ID_Buku char(5) NOT NULL PRIMARY KEY,
---     Judul varchar(50) NOT NULL,
---     Tahun_Terbit date NOT NULL,
---     ID_Penerbit char(5) NOT NULL,
---     FOREIGN KEY (ID_Penerbit) REFERENCES Penerbit(ID_Penerbit)
--- );
-
--- CREATE TABLE Penerbit(
--- 	ID_Penerbit char(5) NOT NULL PRIMARY KEY,
---     Nama_Penerbit varchar(50) NOT NULL,
---     Alamat varchar(200) NOT NULL,
---     No_Telepon varchar(12) NOT NULL
 -- );
 
 -- CREATE TABLE Penulisan(
@@ -76,3 +81,5 @@ CREATE TABLE Penulis(
 --     FOREIGN KEY (ID_Peminjaman) REFERENCES Peminjaman(ID_Peminjaman),
 --     FOREIGN KEY (ID_Buku) REFERENCES Buku(ID_Buku)
 -- );
+
+show tables;
