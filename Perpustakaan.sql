@@ -57,29 +57,31 @@ CREATE TABLE Pustakawan(
     No_Telepon varchar(25) NOT NULL
 );
 
--- CREATE TABLE Peminjaman(
--- 	ID_Peminjaman char(5) NOT NULL PRIMARY KEY,
---     ID_Anggota char(5) NOT NULL,
---     ID_Pustakawan char (5) NOT NULL,
---     TanggalPinjam date NOT NULL,
---     LamaPinjam int NOT NULL,
---     TanggalKembali date NOT NULL,
---     FOREIGN KEY (ID_Anggota) REFERENCES Anggota(ID_Anggota),
---     FOREIGN KEY (ID_Pustakawan) REFERENCES Pustakawan(ID_Pustakawan)
--- );
+CREATE TABLE Penulisan(
+	ID_Penulis char(10) NOT NULL,
+    ID_Buku char(10) NOT NULL,
+    FOREIGN KEY (ID_Penulis) REFERENCES Penulis(ID_Penulis),
+    FOREIGN KEY (ID_Buku) REFERENCES Buku(ID_Buku)
+);
 
--- CREATE TABLE Penulisan(
--- 	ID_Penulis char(5) NOT NULL,
---     ID_Buku char(5) NOT NULL,
---     FOREIGN KEY (ID_Penulis) REFERENCES Penulis(ID_Penulis),
---     FOREIGN KEY (ID_Buku) REFERENCES Buku(ID_Buku)
--- );
+CREATE TABLE Peminjaman(
+	ID_Peminjaman char(10) NOT NULL PRIMARY KEY,
+    TanggalPinjam date NOT NULL,
+    TanggalKembali date NOT NULL,
+    ID_Anggota char(10) NOT NULL,
+    ID_Pustakawan char (10) NOT NULL,
+    FOREIGN KEY (ID_Anggota) REFERENCES Anggota(ID_Anggota),
+    FOREIGN KEY (ID_Pustakawan) REFERENCES Pustakawan(ID_Pustakawan)
+);
 
--- CREATE TABLE Detail_Peminjaman(
--- 	ID_Peminjaman char(5) NOT NULL,
---     ID_Buku char(5) NOT NULL,
---     FOREIGN KEY (ID_Peminjaman) REFERENCES Peminjaman(ID_Peminjaman),
---     FOREIGN KEY (ID_Buku) REFERENCES Buku(ID_Buku)
--- );
+CREATE TABLE Detail_Peminjaman(
+	ID_Peminjaman char(10) NOT NULL,
+    ID_Buku char(10) NOT NULL,
+    Jumlah int,
+    FOREIGN KEY (ID_Peminjaman) REFERENCES Peminjaman(ID_Peminjaman),
+    FOREIGN KEY (ID_Buku) REFERENCES Buku(ID_Buku)
+);
 
-show tables;
+
+
+
